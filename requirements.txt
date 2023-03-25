@@ -1,3 +1,3 @@
-farm-haystack[faiss]
-fastapi
-uvicorn
+farm-haystack[faiss]==1.14.0
+fastapi==0.94.0
+uvicorn==0.21.0

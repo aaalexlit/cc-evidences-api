@@ -4,21 +4,11 @@ from haystack.nodes import EmbeddingRetriever
 
 
 class FAISSIndexer:
-    def __init__(self, path_to_index_dir,
-                 model_name, embedding_dim,
-                 similarity_measure,
-                 path_to_postgres=None) -> None:
+    def __init__(self, path_to_index_dir: str,
+                 model_name: str) -> None:
         self.path_to_index_dir = path_to_index_dir
-        # our db is postgres, only need to set path to faiss index
-        if path_to_postgres:
-            self.path_to_db = path_to_postgres
-            self._set_path_to_index()
-        # our db is SQLLite
-        else:
-            self._set_path_to_index_and_db()
-        self.embedding_dim = embedding_dim
+        self._set_path_to_index_and_db()
         self.model_name = model_name
-        self.similarity_measure = similarity_measure
         self.document_store = self._init_document_store()
         self.retriever = self._init_retriever()
 
@@ -35,7 +25,7 @@ class FAISSIndexer:
         if os.path.exists(self.path_to_index):
             return FAISSDocumentStore.load(index_path=self.path_to_index)
 
-    def _init_retriever(self, progress_bar=True):
+    def _init_retriever(self, progress_bar=False):
         return EmbeddingRetriever(
             document_store=self.document_store,
             embedding_model=self.model_name,

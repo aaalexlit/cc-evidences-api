@@ -1,14 +1,20 @@
 from pydantic import BaseModel
+from pydantic.schema import Literal
 
 
 class EvidenceOutput(BaseModel):
     num: int
     title: str
-    abstract: str
-    similarity: float
+    text: str
+    similarity: float | None
     doi: str | None
     openalex_id: str | None
     year: int | None
+
+
+class VerifiedEvidenceOutput(EvidenceOutput):
+    label: Literal['SUPPORTS', 'REFUTES', 'NOT_ENOUGH_INFO']
+    probability: float
 
 
 class Claim(BaseModel):

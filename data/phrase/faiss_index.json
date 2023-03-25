@@ -1,0 +1,1 @@
+{"sql_url": "sqlite:///data/phrase/faiss_document_store.db", "return_embedding": true, "similarity": "cosine", "embedding_dim": 384, "duplicate_documents": "skip"}
