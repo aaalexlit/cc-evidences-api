@@ -1,4 +1,6 @@
 import os
+
+from haystack import Document
 from haystack.document_stores import FAISSDocumentStore
 from haystack.nodes import EmbeddingRetriever
 
@@ -35,8 +37,8 @@ class FAISSIndexer:
             progress_bar=progress_bar
         )
 
-    def retrieve_matches_for_a_phrase(self, phrase, top_k=10):
-        return self.retriever.retrieve(phrase, top_k=top_k)
+    def retrieve_matches_for_a_phrase(self, phrase, top_k=10) -> list[Document]:
+        return self.retriever.retrieve(phrase, top_k=top_k, scale_score=True)
 
-    def retrieve_matches_for_phrases(self, phrases, top_k=10):
-        return self.retriever.retrieve_batch(phrases, top_k=top_k)
+    def retrieve_matches_for_phrases(self, phrases, top_k=10) -> list[list[Document]]:
+        return self.retriever.retrieve_batch(phrases, top_k=top_k, scale_score=True)
