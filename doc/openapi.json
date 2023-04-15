@@ -1,0 +1,854 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Evidence retrieval",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/api/abstract/evidence": {
+      "post": {
+        "summary": "Get Evidences",
+        "description": "Get top_k relevant evidence abstracts from scientific articles",
+        "operationId": "get_evidences_api_abstract_evidence_post",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "Re Rank",
+              "type": "boolean",
+              "default": true
+            },
+            "name": "re_rank",
+            "in": "query"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Claim"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Get Evidences Api Abstract Evidence Post",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EvidenceOutput"
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/abstract/evidence/batch": {
+      "post": {
+        "summary": "Get Evidences",
+        "description": "Get top_k relevant evidence abstracts from scientific articles",
+        "operationId": "get_evidences_api_abstract_evidence_batch_post",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "Re Rank",
+              "type": "boolean",
+              "default": true
+            },
+            "name": "re_rank",
+            "in": "query"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Claims"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Get Evidences Api Abstract Evidence Batch Post",
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/EvidenceOutput"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/phrase/evidence": {
+      "post": {
+        "summary": "Get Evidences",
+        "description": "Get top_k relevant evidence phrases from scientific articles",
+        "operationId": "get_evidences_api_phrase_evidence_post",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "Re Rank",
+              "type": "boolean",
+              "default": true
+            },
+            "name": "re_rank",
+            "in": "query"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Claim"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Get Evidences Api Phrase Evidence Post",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EvidenceOutput"
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/phrase/evidence/batch": {
+      "post": {
+        "summary": "Get Evidences",
+        "description": "Get top_k relevant evidence phrases from scientific articles",
+        "operationId": "get_evidences_api_phrase_evidence_batch_post",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "Re Rank",
+              "type": "boolean",
+              "default": true
+            },
+            "name": "re_rank",
+            "in": "query"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Claims"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Get Evidences Api Phrase Evidence Batch Post",
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/EvidenceOutput"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/phrase/verify": {
+      "post": {
+        "summary": "Verify",
+        "description": "Verify claim against phrases extracted from scientific paper abstracts",
+        "operationId": "verify_api_phrase_verify_post",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "Include Title",
+              "type": "boolean",
+              "default": true
+            },
+            "name": "include_title",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Re Rank",
+              "type": "boolean",
+              "default": true
+            },
+            "name": "re_rank",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Filter Nei",
+              "type": "boolean",
+              "default": true
+            },
+            "name": "filter_nei",
+            "in": "query"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Claim"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Verify Api Phrase Verify Post",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/VerifiedEvidenceOutput"
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/phrase/verify/batch": {
+      "post": {
+        "summary": "Verify",
+        "description": "Verify claim against phrases extracted from scientific paper abstracts",
+        "operationId": "verify_api_phrase_verify_batch_post",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "Include Title",
+              "type": "boolean",
+              "default": true
+            },
+            "name": "include_title",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Re Rank",
+              "type": "boolean",
+              "default": true
+            },
+            "name": "re_rank",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Filter Nei",
+              "type": "boolean",
+              "default": true
+            },
+            "name": "filter_nei",
+            "in": "query"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Claims"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Verify Api Phrase Verify Batch Post",
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/VerifiedEvidenceOutput"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/abstract/verify": {
+      "post": {
+        "summary": "Verify",
+        "description": "Verify claim against phrases extracted from scientific paper abstracts",
+        "operationId": "verify_api_abstract_verify_post",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "Include Title",
+              "type": "boolean",
+              "default": true
+            },
+            "name": "include_title",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Re Rank",
+              "type": "boolean",
+              "default": true
+            },
+            "name": "re_rank",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Filter Nei",
+              "type": "boolean",
+              "default": true
+            },
+            "name": "filter_nei",
+            "in": "query"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Claim"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Verify Api Abstract Verify Post",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/VerifiedEvidenceOutput"
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/abstract/verify/batch": {
+      "post": {
+        "summary": "Verify",
+        "description": "Verify claim against phrases extracted from scientific paper abstracts",
+        "operationId": "verify_api_abstract_verify_batch_post",
+        "parameters": [
+          {
+            "required": false,
+            "schema": {
+              "title": "Include Title",
+              "type": "boolean",
+              "default": true
+            },
+            "name": "include_title",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Re Rank",
+              "type": "boolean",
+              "default": true
+            },
+            "name": "re_rank",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Filter Nei",
+              "type": "boolean",
+              "default": true
+            },
+            "name": "filter_nei",
+            "in": "query"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Claims"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Verify Api Abstract Verify Batch Post",
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/VerifiedEvidenceOutput"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/split": {
+      "post": {
+        "summary": "Split",
+        "operationId": "split_api_split_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextToSplit"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Split Api Split Post",
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/healthcheck": {
+      "get": {
+        "summary": "Healthcheck",
+        "operationId": "healthcheck_healthcheck_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Healthcheck Healthcheck Get",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "summary": "Readme",
+        "operationId": "readme__get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response Readme  Get",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Claim": {
+        "title": "Claim",
+        "required": [
+          "claim"
+        ],
+        "type": "object",
+        "properties": {
+          "threshold": {
+            "title": "Threshold",
+            "type": "number"
+          },
+          "top_k": {
+            "title": "Top K",
+            "type": "integer"
+          },
+          "claim": {
+            "title": "Claim",
+            "type": "string"
+          }
+        },
+        "example": {
+          "claim": "There is no climate emergency",
+          "threshold": 0.7,
+          "top_k": 10
+        }
+      },
+      "Claims": {
+        "title": "Claims",
+        "required": [
+          "claims"
+        ],
+        "type": "object",
+        "properties": {
+          "threshold": {
+            "title": "Threshold",
+            "type": "number"
+          },
+          "top_k": {
+            "title": "Top K",
+            "type": "integer"
+          },
+          "claims": {
+            "title": "Claims",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "example": {
+          "claims": [
+            "CO2 is not the cause of our current warming trend.",
+            "Natural variation explains a substantial part of global warming observed since 1850"
+          ],
+          "threshold": 0.6,
+          "top_k": 10
+        }
+      },
+      "EvidenceOutput": {
+        "title": "EvidenceOutput",
+        "required": [
+          "num",
+          "title",
+          "text"
+        ],
+        "type": "object",
+        "properties": {
+          "num": {
+            "title": "Num",
+            "type": "integer"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          },
+          "similarity": {
+            "title": "Similarity",
+            "type": "number"
+          },
+          "doi": {
+            "title": "Doi",
+            "type": "string"
+          },
+          "openalex_id": {
+            "title": "Openalex Id",
+            "type": "string"
+          },
+          "year": {
+            "title": "Year",
+            "type": "integer"
+          },
+          "citation_count": {
+            "title": "Citation Count",
+            "type": "integer"
+          },
+          "influential_citation_count": {
+            "title": "Influential Citation Count",
+            "type": "integer"
+          }
+        }
+      },
+      "HTTPValidationError": {
+        "title": "HTTPValidationError",
+        "type": "object",
+        "properties": {
+          "detail": {
+            "title": "Detail",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            }
+          }
+        }
+      },
+      "TextToSplit": {
+        "title": "TextToSplit",
+        "required": [
+          "text"
+        ],
+        "type": "object",
+        "properties": {
+          "text": {
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "example": {
+          "text": "There is no climate emergency. OPINION: The science and data strongly support that our planet’s ecosystems are thriving and that humanity is benefiting from modestly increasing temperature and an increase in carbon dioxide. These facts refute the claim that Earth is spiraling into one man-made climate catastrophe after another. Carbon dioxide (CO2) is portrayed as a demon molecule fueling run-away greenhouse warming. If you get your news only from mainstream media, you would likely believe that CO2 levels are dangerously high and unprecedented. You would be wrong. Concentrations of this gas are slightly less than 420 parts-per-million (ppm), or one-sixth the average historic levels of 2,600 ppm for the last 600 million years. Increases in carbon dioxide in the last 150 years, largely from the burning of fossil fuels, have reversed a dangerous downward trend in the gas’ concentration. During the last glacial period, concentrations nearly reached the “line of death” at 150 parts per million, below which plants die. Viewed in the long-term geologic context, we are actually CO2 impoverished."
+        }
+      },
+      "ValidationError": {
+        "title": "ValidationError",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "loc": {
+            "title": "Location",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            }
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        }
+      },
+      "VerifiedEvidenceOutput": {
+        "title": "VerifiedEvidenceOutput",
+        "required": [
+          "num",
+          "title",
+          "text",
+          "label",
+          "probability"
+        ],
+        "type": "object",
+        "properties": {
+          "num": {
+            "title": "Num",
+            "type": "integer"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          },
+          "similarity": {
+            "title": "Similarity",
+            "type": "number"
+          },
+          "doi": {
+            "title": "Doi",
+            "type": "string"
+          },
+          "openalex_id": {
+            "title": "Openalex Id",
+            "type": "string"
+          },
+          "year": {
+            "title": "Year",
+            "type": "integer"
+          },
+          "citation_count": {
+            "title": "Citation Count",
+            "type": "integer"
+          },
+          "influential_citation_count": {
+            "title": "Influential Citation Count",
+            "type": "integer"
+          },
+          "label": {
+            "title": "Label",
+            "enum": [
+              "SUPPORTS",
+              "REFUTES",
+              "NOT_ENOUGH_INFO"
+            ],
+            "type": "string"
+          },
+          "probability": {
+            "title": "Probability",
+            "type": "number"
+          }
+        }
+      }
+    }
+  }
+}

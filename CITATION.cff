@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+title: Climate Change Evidence Retrieval API
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Alex
+    family-names: Litvinov
+    email: aaalex.lit@gmail.com
+    orcid: 'https://orcid.org/0009-0001-9850-0307'
+repository-code: 'https://github.com/aaalexlit/cc-evidences-api'
+license: MIT
