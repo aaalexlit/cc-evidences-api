@@ -50,7 +50,7 @@ and [here](#Downsides of OpenAlex)
 ## Workflow
 ```mermaid
 flowchart TB
-    A(Keyword boolean query) ==> |Fetch from OpenAlex.org| Q("csv with scientific papers' abstracts")
+    A(Keyword boolean query) --> |Fetch from OpenAlex.org| Q("csv with scientific papers' abstracts")
     Q --> |Fetch from semanticscholar.org| B("csv with scientific papers' abstracts\nwith citation metrics")
     B --> |Split abstract into sentences| D["Collection of Haystack\ndocuments"]
     B --> |Check if full abstract text is about climate| G["Collection of Haystack\ndocuments"]

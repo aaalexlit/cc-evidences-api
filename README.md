@@ -3,7 +3,48 @@
 ## Main concepts
 
 The API is created to perform scientific verification of claims
-extracted from Climate Change related news articles
+extracted from Climate Change related news articles in order to detect
+potential inaccuracies of the latter.
+
+### General workflow
+
+```mermaid
+flowchart TB
+   subgraph client1 [Client]
+      A(Media Article text or URL) -->|Split into sentences| S1("Sentence 1")
+      A -->|Split into sentences| S2("Sentence 2")
+      A -->|Split into sentences| SN("...")
+      S1 --> CR{"Climate related?\n (Optional)"}
+      S2 --> CR
+      SN --> CR
+      CR -->|Yes| IC{"Is a claim? \n(Optional)"}
+      CR --No --x N[ Ignore ]
+      IC --No --x N1[Ignore]
+   end
+   subgraph API
+      IC -- Yes ---> E["Retrieve Top k most similar evidences"]
+      E --> R["Re-rank using citation metrics (Optional)"]
+      R --> VC[["Validate with Climate-BERT based model"]]
+   end
+   subgraph client2 [ Client ]
+      R ---> VM[["Validate with MultiVerS"]]
+      VC --> D["Display predictions"]
+      VM --> D
+   end
+    style R stroke:#808080,stroke-width:2px,stroke-dasharray: 5 5
+    style CR stroke:#808080,stroke-width:2px,stroke-dasharray: 5 5
+    style IC stroke:#808080,stroke-width:2px,stroke-dasharray: 5 5
+
+```
+
+### Main functionality
+**The API performs 2 main tasks**
+- Evidence retrieval for given claim(s) under all `evidence` endpoints
+- Evidence retrieval + verification for given claim(s) under all `vefify` endpoints
+- Supplementary task of splitting text into sentences under `split` endpoint
+to enable Chrome extension functioning
+
+#### Model for claim verification against retrieved evidence
 
 ### Scientific evidences index and database
 Please read [Evidence database creation](doc/db.md) section
@@ -25,8 +66,9 @@ Please read [Evidence database creation](doc/db.md) section
 
 ## Generate Markdown from OpenAPI schema
 
-Is done with [widdershins](https://mermade.github.io/widdershins/ConvertingFilesBasicCLI.html)
-
+[api.md](doc/api.md) is generated from [openapi.json](doc/openapi.json) using
+[widdershins](https://mermade.github.io/widdershins/ConvertingFilesBasicCLI.html)
+the following way
 ```shell
 widdershins --language_tabs 'python:Python' 'shell:Shell' 'javascript:Javascript' --summary -o doc/api.md doc/openapi.json
 ```
