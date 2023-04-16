@@ -10,4 +10,6 @@ authors:
     email: aaalex.lit@gmail.com
     orcid: 'https://orcid.org/0009-0001-9850-0307'
 repository-code: 'https://github.com/aaalexlit/cc-evidences-api'
+repository-artifact: >-
+  https://hub.docker.com/repository/docker/aaalexlit/cc-evidences-api/
 license: MIT
