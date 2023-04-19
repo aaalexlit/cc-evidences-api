@@ -2,6 +2,10 @@
 
 1. Create a python3.10-based virtual environment
 2. Download SQLight dbs with metadata and FAISS indices from Google Drive
+to the corresponding folders
+   ```shell
+   
+   ```
 1. Switch to the created virtual env and install the dependencies
     ```bash
     pip install -r requirements.txt

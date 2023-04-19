@@ -50,6 +50,9 @@ to enable Chrome extension functioning
 
 ### Model for claim verification against retrieved evidence
 
+[Climatebert-fact-checking model](https://huggingface.co/amandakonet/climatebert-fact-checking) 
+available from huggingface
+
 ### Scientific evidences index and database
 Please read [Evidence database creation](doc/db.md) section
 

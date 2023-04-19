@@ -89,7 +89,27 @@ on the huggingface model card that says that
 Therefore, potentially it makes sense to change the model on the next iterations because scientific 
 abstracts tend to be [250-300 words long](https://blog.wordvice.com/how-to-decrease-the-length-of-a-research-abstract/#:~:text=Most%20word%20limits%20specify%20a,is%2C%20well%2C%20a%20science.)
 
+## Model to classify abstracts as climage related or not
+
+[Climateattention model from huggingface](https://huggingface.co/kruthof/climateattention-ctw) 
+is used to perform this classification.
+It is a ClimateBERT [[5]](#references) based classifier fine-tuned on the
+ClimaText dataset [[6]](#references) 
+
+### Split into sentences
+[Spacy "en_core_web_sm" pipeline](https://spacy.io/models/en#en_core_web_sm)
+is used for text segmentation task  
+This model is the smallest and the fastest and according to spacy's 
+[Accuracy Evaluation](https://spacy.io/models/en#en_core_web_sm-accuracy) has
+the same metric values as the bigger CPU-optimized models
+
 ## Appendix 
+
+### Why index only abstracts not the full papers?
+
+Abstracts are more manageable in terms of storage.  
+According to [[4]](#references) evidence is found in abstract in 
+more than 60% cases
 
 ### Why not use semanticscholar keyword search?
 
@@ -126,3 +146,8 @@ is the following
  Machine-learning-based evidence and attribution mapping of 100,000 climate impact studies. *Nat. Clim. Chang.* **11**, 966–972 (2021). https://doi.org/10.1038/s41558-021-01168-6
 2. Reimers, N., & Gurevych, I. (2019). Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks. Conference on Empirical Methods in Natural Language Processing.
 3. Hofstätter, S., Lin, S., Yang, J., Lin, J.J., & Hanbury, A. (2021). Efficiently Teaching an Effective Dense Retriever with Balanced Topic Aware Sampling. Proceedings of the 44th International ACM SIGIR Conference on Research and Development in Information Retrieval.
+4. Wadden, D., Lo, K., Wang, L.L., Lin, S., van Zuylen, M., Cohan, A., & Hajishirzi, H. (2020). Fact or Fiction: Verifying Scientific Claims. ArXiv, abs/2004.14974.
+5. Webersinke, N., Kraus, M., Bingler, J. A., & Leippold, M. (2021). Climatebert: 
+A pretrained language model for climate-related text. arXiv preprint arXiv:2110.12010.
+6. Varini, F. S., Boyd-Graber, J., Ciaramita, M., & Leippold, M. (2020). ClimaText: 
+A dataset for climate change topic detection. arXiv preprint arXiv:2012.00483.
