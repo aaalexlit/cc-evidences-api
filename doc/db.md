@@ -13,8 +13,8 @@ Two sources
 - [OpenAlex](https://openalex.org/)
 - [Semantic Scholar](https://www.semanticscholar.org/)  
 were used in combination to retrieve scientific papers’ abstracts and additional information. 
-Please see the reasons why to combine the two [here](#Why not use semanticscholar keyword search?)
-and [here](#Downsides of OpenAlex)
+Please see the reasons why to combine the two [here](#why-not-use-semanticscholar-keyword-search)
+and [here](#downsides-of-openalex)
 
 ## Stages
 
