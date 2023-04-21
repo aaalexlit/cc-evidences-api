@@ -17,11 +17,24 @@ were used in combination to retrieve scientific papers’ abstracts and addition
 Please see the reasons why to combine the two [here](#why-not-use-semanticscholar-keyword-search)
 and [here](#downsides-of-openalex)
 
+<style
+  type="text/css">
+redTag {color:red;}
+</style>
 
+## <redTag>Important note</redTag>
+Currently, not all the fetched abstracts that were fetched are indexed for searches  
+Indexing is done using [Google Colab](https://colab.research.google.com/) 
+Both due to computational resources limitations:
+1. Indexing not done on GPU is extremely slow therefore the usage of Colab
+2. Colab provides limited time GPU-powered sessions
+3. Searches require the whole index to be in RAM and the API is currently deployed
+on Google Cloud on the instance with rather moderate RAM volume (16GB)
 
 ## Stages
 
-1. **Keyword search**. Perform **keyword search** in [OpenAlex](https://openalex.org/) reproducing the approach from [[1]](#references) to get a 
+1. **Keyword search**. Perform **keyword search** in [OpenAlex](https://openalex.org/) 
+   reproducing the approach from[^1] to get a 
    comprehensive set of scientific articles abstracts covering the topic of climate impacts in
    csv format.  
    The code for cvs generation is available [here](https://github.com/aaalexlit/cc-claim-verification/blob/main/download/query_openalex.py).
@@ -47,7 +60,7 @@ and [here](#downsides-of-openalex)
   evidences to verify a provided claim. [Sentence transformers](https://www.sbert.net/)
   framework was chosen for this task
   as it is shown to be the most efficient and accurate method to 
-  perform semantic searches [[2]](#references)  
+  perform semantic searches[^2]  
   [Haystack framework](https://haystack.deepset.ai/) 
   takes care of vector and metadata indexing and subsequent 
   [dense retrieval](#why-to-use-dense-retrival-instead-of-keyword--search)
@@ -82,7 +95,7 @@ This index is needed to perform
 [asymmetric semantic search](https://www.sbert.net/examples/applications/semantic-search/README.html#symmetric-vs-asymmetric-semantic-search)
 (ie query is shorter than corpus entries and flipping them with each other doesn't make sense)  
 [msmarco-distilbert-base-tas-b](https://huggingface.co/sebastian-hofstaetter/distilbert-dot-tas_b-b256-msmarco)
-model [[3]](#references) tuned for dot-product was chosen for semantic embeddings calculation for abstract based index  
+model[^3] tuned for dot-product was chosen for semantic embeddings calculation for abstract based index  
 *Why this model?*
 - Models tuned for dot-product prefer the retrieval of longer passages than the cosine-similarity ones.
 - The model shows good speed and quality on the benchmarks  
@@ -98,8 +111,8 @@ abstracts tend to be [250-300 words long](https://blog.wordvice.com/how-to-decre
 
 [Climateattention model from huggingface](https://huggingface.co/kruthof/climateattention-ctw) 
 is used to perform this classification.
-It is a ClimateBERT [[5]](#references) based classifier fine-tuned on the
-ClimaText dataset [[6]](#references) 
+It is a ClimateBERT[^5] based classifier fine-tuned on the
+ClimaText dataset[^6]
 
 ## Split into sentences
 [Spacy "en_core_web_sm" pipeline](https://spacy.io/models/en#en_core_web_sm)
@@ -107,6 +120,14 @@ is used for text segmentation task
 This model is the smallest and the fastest and according to spacy's 
 [Accuracy Evaluation](https://spacy.io/models/en#en_core_web_sm-accuracy) has
 the same metric values as the bigger CPU-optimized models
+
+##  Code links
+
+- [Colab Notebook](https://github.com/aaalexlit/omdena_climate_change_challenge_notebooks/blob/main/Index_scientific_papers_abstracts_for_searches_with_sem_scholar.ipynb)
+that creates abstract-based index
+- [Colab Notebook](https://github.com/aaalexlit/omdena_climate_change_challenge_notebooks/blob/main/Index_claims_from_abstracts_for_searches_with_sem_scholar.ipynb)
+that creates sentence-based index
+
 
 ## Appendix 
 
@@ -120,13 +141,13 @@ For a detailed discussion please refer to the
 ### Why index only abstracts not the full papers?
 
 Abstracts are more manageable in terms of storage.  
-According to [[4]](#references) evidence is found in abstract in 
+According to[^4] evidence is found in abstract in 
 more than 60% cases
 
 ### Why not use semanticscholar keyword search?
 
 - No way to perform boolean queries and to reproduce keyword search 
-   from the article [[1]](#references) mentioned above
+   from the article[^1] mentioned above
 - Not all the articles that has abstracts in OpenAlex do have those 
   in semanticscholar (potentially the reverse is also true)
 - Has its own ranking system already included whereas at the first stage 
@@ -154,12 +175,12 @@ is the following
 
 ## References
 
-1. Callaghan, M., Schleussner, CF., Nath, S. *et al.*
+[^1]: Callaghan, M., Schleussner, CF., Nath, S. *et al.*
  Machine-learning-based evidence and attribution mapping of 100,000 climate impact studies. *Nat. Clim. Chang.* **11**, 966–972 (2021). https://doi.org/10.1038/s41558-021-01168-6
-2. Reimers, N., & Gurevych, I. (2019). Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks. Conference on Empirical Methods in Natural Language Processing.
-3. Hofstätter, S., Lin, S., Yang, J., Lin, J.J., & Hanbury, A. (2021). Efficiently Teaching an Effective Dense Retriever with Balanced Topic Aware Sampling. Proceedings of the 44th International ACM SIGIR Conference on Research and Development in Information Retrieval.
-4. Wadden, D., Lo, K., Wang, L.L., Lin, S., van Zuylen, M., Cohan, A., & Hajishirzi, H. (2020). Fact or Fiction: Verifying Scientific Claims. ArXiv, abs/2004.14974.
-5. Webersinke, N., Kraus, M., Bingler, J. A., & Leippold, M. (2021). Climatebert: 
+[^2]: Reimers, N., & Gurevych, I. (2019). Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks. Conference on Empirical Methods in Natural Language Processing.
+[^3]: Hofstätter, S., Lin, S., Yang, J., Lin, J.J., & Hanbury, A. (2021). Efficiently Teaching an Effective Dense Retriever with Balanced Topic Aware Sampling. Proceedings of the 44th International ACM SIGIR Conference on Research and Development in Information Retrieval.
+[^4]: Wadden, D., Lo, K., Wang, L.L., Lin, S., van Zuylen, M., Cohan, A., & Hajishirzi, H. (2020). Fact or Fiction: Verifying Scientific Claims. ArXiv, abs/2004.14974.
+[^5]: Webersinke, N., Kraus, M., Bingler, J. A., & Leippold, M. (2021). Climatebert: 
 A pretrained language model for climate-related text. arXiv preprint arXiv:2110.12010.
-6. Varini, F. S., Boyd-Graber, J., Ciaramita, M., & Leippold, M. (2020). ClimaText: 
+[^6]: Varini, F. S., Boyd-Graber, J., Ciaramita, M., & Leippold, M. (2020). ClimaText: 
 A dataset for climate change topic detection. arXiv preprint arXiv:2012.00483.
