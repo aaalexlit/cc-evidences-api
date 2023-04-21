@@ -6,7 +6,8 @@ There are 2 evidence databases created for relevant evidence similarity searches
 1. Indexes scientific papers’ abstracts broken into individual sentences
 
 The reason for creation of 2 different indexes is that one of the
-models that we used for verification takes 2 sentences as input and the other takes a sentence and an abstract.
+models that we used for verification takes 2 sentences as input and 
+the other takes a sentence and an abstract.
 
 ## Scientific articles sources
 Two sources
@@ -15,6 +16,8 @@ Two sources
 were used in combination to retrieve scientific papers’ abstracts and additional information. 
 Please see the reasons why to combine the two [here](#why-not-use-semanticscholar-keyword-search)
 and [here](#downsides-of-openalex)
+
+
 
 ## Stages
 
@@ -33,7 +36,8 @@ and [here](#downsides-of-openalex)
 2. **Citation metrics**. Use [Semantic Scholar](https://www.semanticscholar.org/) API
    to enrich the readily available abstracts with **citation metrics**.  
    [Link to the code](https://github.com/aaalexlit/cc-claim-verification/blob/main/download/semanticscholar/add_info.py)
-    1. Gather information on citations count, influential citations count to use it for re-ranking the results of 
+    1. Gather information on citations count, influential citations 
+   count to use it for [re-ranking](../README.md#evidence-re-ranking) the results of 
    semantic similarity search.
     2. Potentially improve abstract text quality (if there’s a version of the abstract available 
    from Semantic Scholar it replaces the abstract downloaded from OpenAlex). 
@@ -45,7 +49,8 @@ and [here](#downsides-of-openalex)
   as it is shown to be the most efficient and accurate method to 
   perform semantic searches [[2]](#references)  
   [Haystack framework](https://haystack.deepset.ai/) 
-  takes care of vector and metadata indexing and subsequent retrieval
+  takes care of vector and metadata indexing and subsequent 
+  [dense retrieval](#why-to-use-dense-retrival-instead-of-keyword--search)
 
 ## Workflow
 ```mermaid
@@ -96,7 +101,7 @@ is used to perform this classification.
 It is a ClimateBERT [[5]](#references) based classifier fine-tuned on the
 ClimaText dataset [[6]](#references) 
 
-### Split into sentences
+## Split into sentences
 [Spacy "en_core_web_sm" pipeline](https://spacy.io/models/en#en_core_web_sm)
 is used for text segmentation task  
 This model is the smallest and the fastest and according to spacy's 
@@ -104,6 +109,13 @@ This model is the smallest and the fastest and according to spacy's
 the same metric values as the bigger CPU-optimized models
 
 ## Appendix 
+
+### Why to use dense retrival instead of keyword search?
+
+Keyword search doesn't take word order and syntax into account neither works well 
+with synonyms.
+For a detailed discussion please refer to the 
+[Deeper Dive: Vector-Based vs Keyword-Based](https://docs.haystack.deepset.ai/docs/retriever#deeper-dive-vector-based-vs-keyword-based)
 
 ### Why index only abstracts not the full papers?
 
