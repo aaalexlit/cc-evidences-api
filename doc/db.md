@@ -17,12 +17,7 @@ were used in combination to retrieve scientific papers’ abstracts and addition
 Please see the reasons why to combine the two [here](#why-not-use-semanticscholar-keyword-search)
 and [here](#downsides-of-openalex)
 
-<style
-  type="text/css">
-redTag {color:red;}
-</style>
-
-## <redTag>Important note</redTag>
+## :warning: Important note 
 Currently, not all the fetched abstracts that were fetched are indexed for searches  
 Indexing is done using [Google Colab](https://colab.research.google.com/) 
 Both due to computational resources limitations:
@@ -30,6 +25,8 @@ Both due to computational resources limitations:
 2. Colab provides limited time GPU-powered sessions
 3. Searches require the whole index to be in RAM and the API is currently deployed
 on Google Cloud on the instance with rather moderate RAM volume (16GB)
+4. Limited storage space. Currently, all the indices and csvs are stored
+on my personal Google Drive taking the majority of available space
 
 ## Stages
 
