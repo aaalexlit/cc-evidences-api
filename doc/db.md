@@ -104,7 +104,7 @@ on the huggingface model card that says that
 Therefore, potentially it makes sense to change the model on the next iterations because scientific 
 abstracts tend to be [250-300 words long](https://blog.wordvice.com/how-to-decrease-the-length-of-a-research-abstract/#:~:text=Most%20word%20limits%20specify%20a,is%2C%20well%2C%20a%20science.)
 
-## Model to classify abstracts as climage related or not
+## Model to classify abstracts as climate related or not
 
 [Climateattention model from huggingface](https://huggingface.co/kruthof/climateattention-ctw) 
 is used to perform this classification.
