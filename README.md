@@ -11,9 +11,10 @@ potential inaccuracies of the latter.
 ```mermaid
 flowchart TB
    subgraph client1 [Streamlit Client]
-      A(Media Article text or URL) -->|Split into sentences| S1("Sentence 1")
-      A -->|Split into sentences| S2("Sentence 2")
-      A -->|Split into sentences| SN("...")
+      A(Media Article text or URL) --> COR{"Co-reference resolution \n (Optional)"}
+      COR -->|Split into sentences| S1("Sentence 1")
+      COR -->|Split into sentences| S2("Sentence 2")
+      COR -->|Split into sentences| SN("...")
       S1 --> CR{"Climate related?\n (Optional)"}
       S2 --> CR
       SN --> CR
@@ -24,15 +25,16 @@ flowchart TB
    subgraph API
       IC -- Yes ---> E["Retrieve Top k most similar evidences"]
       E:::curAppNode --> R["Re-rank using citation metrics (Optional)"]
-      R:::curAppNode --> VC[["Validate with Climate-BERT based model"]]
+      R:::curAppNode --> VC[["Verify with Climate-BERT based model"]]
    end
    subgraph client2 [ Streamlit Client ]
-      R ---> VM[["Validate with MultiVerS"]]
+      R ---> VM[["Verify with MultiVerS"]]
       VC:::curAppNode --> D["Display predictions"]
       VM --> D
    end
     style R stroke:#808080,stroke-width:2px,stroke-dasharray: 5 5
     style CR stroke:#808080,stroke-width:2px,stroke-dasharray: 5 5
+    style COR stroke:#808080,stroke-width:2px,stroke-dasharray: 5 5
     style IC stroke:#808080,stroke-width:2px,stroke-dasharray: 5 5
     style API fill:#E9EAE0,color:#E7625F
     classDef curAppNode fill:#F7BEC0,color:#C85250,stroke:#E7625F

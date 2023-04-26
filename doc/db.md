@@ -60,7 +60,9 @@ on my personal Google Drive taking the majority of available space
   perform semantic searches[^2]  
   [Haystack framework](https://haystack.deepset.ai/) 
   takes care of vector and metadata indexing and subsequent 
-  [dense retrieval](#why-to-use-dense-retrival-instead-of-keyword--search)
+  [dense retrieval](#why-to-use-dense-retrival-instead-of-keyword--search)  
+  **Note:** Article title is concatenated with the abstract text to produce the encoding to 
+  improve the relevance of the search results.
 
 ## Workflow
 ```mermaid
