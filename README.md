@@ -6,6 +6,9 @@ The API is created to perform scientific verification of claims
 extracted from Climate Change related news articles in order to detect
 potential inaccuracies of the latter.
 
+![OpenApi specification of this API](api.gif)
+
+
 ### General workflow
 
 ```mermaid
